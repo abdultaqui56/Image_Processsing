@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Image Blending Tool</title>
+	<style>
+	
+/* Add a neon border effect to the form */
+form {
+  border: 2px solid #fff;
+  box-shadow: 0 0 5px #fff;
+  border-radius: 10px;
+  padding: 20px;
+  position: relative;
+}
+
+form::before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  right: -10px;
+  bottom: -10px;
+  z-index: -1;
+  border-radius: inherit;
+  background: linear-gradient(45deg, #f0f, #0ff, #00f, #f00, #f0f, #0ff, #00f, #f00, #f0f);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0 50%;
+  }
+}
+
+/* Add a neon border effect to the image container */
+#image-container {
+  border: 2px solid #fff;
+  box-shadow: 0 0 5px #fff;
+  border-radius: 10px;
+  padding: 20px;
+  position: relative;
+}
+
+#image-container::before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  right: -10px;
+  bottom: -10px;
+  z-index: -1;
+  border-radius: inherit;
+  background: linear-gradient(45deg, #f0f, #0ff, #00f, #f00, #f0f, #0ff, #00f, #f00, #f0f);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+}
+body {
+			background-color: #f94141;
+		}
+/* Define the animation */
+@keyframes glow {
+  0% {
+    box-shadow: none;
+  }
+  50% {
+    box-shadow: 0 0 10px #e2d9d9, 0 0 20px #52a323, 0 0 30px #fff, 0 0 40px #00a2ff, 0 0 70px #00a2ff, 0 0 80px #00a2ff, 0 0 100px #00a2ff;
+  }
+  100% {
+    box-shadow: none;
+  }
+}
+
+/* Apply the animation to the select element */
+.animated {
+  animation: glow 1s infinite;
+}
+a{
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+
+
+  /* Navigation Styling */
+  nav {
+    text-align: center;
+    background-color: #333;
+  }
+
+  nav a {
+    display: inline-block;
+    padding: 10px 20px;
+    color: #f1e5e5;
+    text-decoration: none;
+    transition: background-color 0.3s;
+  }
+
+  nav a:hover {
+    background-color: #555;
+  }
+
+  /* Floating Effect */
+  nav a {
+    position: relative;
+    transform: translateX(0);
+    transition: transform 0.3s;
+    display: inline-block;
+    margin-right: 1350px;
+  }
+
+  nav a::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #f40101;
+    z-index: -1;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s;
+  }
+
+  nav a:hover {
+    transform: translateX(-5px);
+  }
+
+  nav a:hover::before {
+    transform: scaleX(1);
+  }
+
+  .download-button {
+  background-color: #0ff;
+  border: none;
+  color: #faf8f8;
+  padding: 2px 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  box-shadow: 0 0 5px #0ff;
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+
+.download-button::before {
+  content: "";
+  position: absolute;
+  top: -5px;
+  left: -2px;
+  right: -10px;
+  bottom: -5px;
+  z-index: -1;
+
+  border-radius: inherit;
+  background: linear-gradient(45deg,  #52a323,#000,  #f00, #0ff);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0 50%;
+  }
+}
+
+@keyframes float {
+  0% {
+    transform: translatey(0px);
+  }
+  50% {
+    transform: translatey(-5px);
+  }
+  100% {
+    transform: translatey(0px);
+  }
+}
+
+#blend-button {
+  background-color: rgb(3, 6, 6);
+  border: none;
+  color: #e0d4d4;
+  padding: 5px 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  box-shadow: 0 0 10px #0ff;
+  animation: glow 1s infinite;
+}
+
+@keyframes glow {
+  0% {
+    box-shadow: none;
+  }
+  50% {
+    box-shadow: 0 0 10px #e2d9d9, 0 0 20px #52a323, 0 0 30px #fff, 0 0 40px #00a2ff, 0 0 70px #00a2ff, 0 0 80px #00a2ff, 0 0 100px #00a2ff;
+  }
+  100% {
+    box-shadow: none;
+  }
+}
+
+
+
+	</style>
+</head>
+<body>
+  <nav>
+    
+      <a href="index.html">  BACK</a> 
+    
+  </nav>
+	<h2 style="font-family: 'Courier New', Courier, monospace;
+  color: #fff;
+  text-shadow: 0 0 10px #7c0808,
+               0 0 20px #0b0606,
+               0 0 30px #fff,
+               0 0 40px #0ff,
+               0 0 70px #0ff,
+               0 0 80px #0ff,
+               0 0 100px #0ff,
+               0 0 150px #0ff;"><marquee>
+    IMAGE BLENDING TOOL</marquee>
+</h2>
+
+
+	<form>
+		<label for="image1">Image 1:</label>
+		<input type="file" id="image1" accept="image/*">
+
+		<label for="image2">Image 2:</label>
+		<input type="file" id="image2" accept="image/*">
+
+		<label for="blend-mode">Blend Mode:</label>
+		<select id="blend-mode" class="animated">
+			<option value="normal">Normal</option>
+			<option value="multiply">Multiply</option>
+			<option value="screen">Screen</option>
+			<option value="overlay">Overlay</option>
+			<option value="darken">Darken</option>
+			<option value="lighten">Lighten</option>
+			<option value="color-dodge">Color Dodge</option>
+			<option value="color-burn">Color Burn</option>
+			<option value="hard-light">Hard Light</option>
+			<option value="soft-light">Soft Light</option>
+			<option value="difference">Difference</option>
+			<option value="exclusion">Exclusion</option>
+			<option value="hue">Hue</option>
+			<option value="saturation">Saturation</option>
+			<option value="color">Color</option>
+			<option value="luminosity">Luminosity</option>
+		</select>
+
+        <button type="button" id="blend-button">Blend Images</button><br><br>
+        <button class="download-button" id="download-button" disabled>Download Blended Image</button>
+
+	</form>
+
+	<div id="image-container"></div>
+   
+	<script src="blend.js"></script>
+</body>
+</html>

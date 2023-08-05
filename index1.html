@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Image Resizing Example</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <style>
+    /* Neon Floating Effect */
+    body {
+      background-color: #ddb608;
+      overflow-y: scroll;
+    }
+
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 133vh;
+    }
+
+    .neon-effect {
+      position: relative;
+      display: inline-block;
+      animation: neon 1.5s ease-in-out infinite;
+    }
+
+    @keyframes neon {
+      0% {
+        box-shadow: 0 0 5px #fff, 0 0 20px #fff, 0 0 40px #fff, 0 0 80px #0ff, 0 0 120px rgb(5, 164, 244), 0 0 200px rgb(4, 152, 237), 0 0 300px rgb(91, 4, 4);
+      }
+      50% {
+        box-shadow: none;
+      }
+      100% {
+        box-shadow: 0 0 5px #fff, 0 0 20px #06e3f7, 0 0 40px #05d6e9, 0 0 80px rgb(4, 241, 238), 0 0 120px #0ff, 0 0 200px #0ff, 0 0 300px #0ff;
+      }
+    }
+
+    /* Other Styles */
+    #image-preview {
+      max-width: 500px;
+      max-height: 500px;
+    }
+
+    .option {
+      margin-bottom: 10px;
+    }
+
+    #download-button {
+      display: block;
+      margin-top: 10px;
+      padding: 5px 20px;
+      border: none;
+      border-radius: 5px;
+      background-color: #01090a;
+      color: #fff;
+      font-size: 16px;
+      font-weight: bold;
+      text-align: center;
+      text-decoration: none;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      animation: neon-pulse 1.5s ease-in-out infinite;
+      box-shadow: 0 0 5px rgba(5, 214, 233, 0.8), 0 0 20px rgba(5, 214, 233, 0.8), 0 0 40px rgba(5, 214, 233, 0.8), 0 0 80px rgba(5, 214, 233, 0.8), 0 0 120px rgba(5, 214, 233, 0.8), 0 0 200px rgba(5, 214, 233, 0.8), 0 0 300px rgba(5, 214, 233, 0.8);
+      transition: box-shadow 0.6s;
+    }
+
+    #download-button:hover {
+      box-shadow: 0 0 5px #fff, 0 0 20px #06e3f7, 0 0 40px #05d6e9, 0 0 80px rgb(4, 241, 238), 0 0 120px #0ff, 0 0 200px #0ff, 0 0 300px #0ff;
+    }
+
+    #download-button::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background-color: #040b0c;
+      opacity: 0.4;
+      transition: transform 0.6s;
+    }
+
+    #download-button:hover::before {
+      transform: translateX(200%);
+    }
+
+    @keyframes neon-pulse {
+      0% {
+        box-shadow: 0 0 5px #fff, 0 0 20px #06e3f7, 0 0 40px #05d6e9, 0 0 80px rgb(4, 241, 238), 0 0 120px #0ff, 0 0 200px #0ff, 0 0 300px #0ff;
+      }
+      50% {
+        box-shadow: 0 0 5px #fff, 0 0 20px #06e3f7, 0 0 40px #05d6e9, 0 0 80px rgb(4, 241, 238), 0 0 120px #0ff, 0 0 200px #0ff, 0 0 300px #0ff;
+      }
+      100% {
+        box-shadow: 0 0 5px #fff, 0 0 20px #06e3f7, 0 0 40px #05d6e9, 0 0 80px rgb(4, 241, 238), 0 0 120px #0ff, 0 0 200px #0ff, 0 0 300px #0ff;
+      }
+    }
+
+    /* Icon Styles */
+    .icon {
+      font-size: 24px;
+      margin-right: 5px;
+    }
+
+    .powerpoint-icon {
+      color: #d0443b;
+    }
+
+    .word-icon {
+      color: #2b5797;
+    }
+
+    .openoffice-icon {
+      color: #ca5800;
+    }
+
+
+  /* Navigation Styling */
+
+
+  nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    background-color: #fcf5f5;
+  }
+
+  nav li {
+    margin: 0 10px;
+  }
+
+  nav a {
+    display: block;
+    padding: 10px 20px;
+    color: #080707;
+    text-decoration: none;
+    transition: background-color 0.3s;
+  }
+
+  nav a:hover {
+    background-color: #44b478;
+  }
+
+  /* Floating Effect */
+  nav li {
+    position: relative;
+    transform: translateX(0);
+    transition: transform 0.3s;
+  }
+
+  nav li::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    z-index: -1;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s;
+  }
+
+  nav li:hover {
+    transform: translateX(-5px);
+  }
+
+  nav li:hover::before {
+    transform: scaleX(1);
+  }
+
+
+  body {
+      background-color: #ddb608;
+      overflow-y: scroll;
+    }
+
+
+</style>
+  
+
+</head>
+<body bgcolor="pink">
+  <nav>
+    <ul>
+      <li><a href="index.html">HOME</a></li>
+      <li><a href="Blend.html">BLEND</a></li>
+      <li><a href="index.html">BACK</a></li>
+    </ul>
+  </nav>
+
+
+  <div class="container">
+    <div class="neon-effect">
+      <input type="file" id="image-input" onchange="loadImage(this)">
+      <div><br><br>
+        <h3>Image Editing Options</h3>
+        <div class="option">
+          <label for="grayscale-checkbox">Grayscale:</label>
+          <input type="checkbox" id="grayscale-checkbox" onchange="applyOptions()">
+        </div>
+        <div class="option">
+          <label for="blur-checkbox">Blur:</label>
+          <input type="checkbox" id="blur-checkbox" onchange="applyOptions()">
+        </div>
+        <div class="option">
+          <h3>Crop Image</h3>
+          <label for="crop-x">X:</label>
+          <input type="number" id="crop-x" value="0">
+          <label for="crop-y">Y:</label>
+          <input type="number" id="crop-y" value="0">
+          <label for="crop-width">Width:</label>
+          <input type="number" id="crop-width" value="100">
+          <label for="crop-height">Height:</label>
+          <input type="number" id="crop-height" value="100">
+          <button onclick="cropImage()">Crop</button>
+          <button onclick="resetImage()">Reset</button>
+        </div>
+      </div>
+      <div>
+        <h3>Image Preview</h3>
+        <img id="image-preview" style="display: none;">
+      </div>
+      <div>
+        <h3>Cropped Image</h3>
+        <img id="cropped-image" style="display: none;">
+        <a id="download-link" style="display: none;"></a><br>
+        <button id="download-button" onclick="downloadImage()" style="display: none;"><center>Download</center></button>
+      </div>
+      <div>
+        <h3>Share</h3>
+        <button href="https://www.bing.com/search?q=powerpoint+presentation&cvid=c2b5a679a13144eb8bfa644187ee350b&aqs=edge.0.0j69i57j0l7.3145j0j7&FORM=ANNTA0&PC=HCTS"><i class="icon powerpoint-icon fas fa-file-powerpoint"></i>PowerPoint</button>
+        <button><i class="icon word-icon fas fa-file-word"></i>Word</button>
+        <button><i class="icon openoffice-icon fas fa-file-alt"></i>Apache OpenOffice</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script1.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-DVSt1Mp0O6m5P0YNb3Y1YmgLHtu9jVorDPlYXPkkjOy+k4iiHzPkmh9Bo5EZjSrvNgZMIhbEydtGkSfD5tlzKw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link href="https://fonts.googleapis.com/css?family=Kaushan+Script|Poppins&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <title>Image Processing</title>
+  <style>
+    footer {
+  background-color: #222;
+  color: #fff;
+  padding: 10px 0;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.footer-content {
+  width: calc(33.33% - 20px);
+  margin-bottom: 40px;
+}
+
+.footer-content:last-child {
+  width: 100%;
+}
+
+.footer-content h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.footer-content p {
+  font-size: 16px;
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+
+.social-media {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+.social-media li {
+  margin-right: 10px;
+}
+
+.social-media li:last-child {
+  margin-right: 0;
+}
+
+.social-media a {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  line-height: 30px;
+  color: #fff;
+  border-radius: 50%;
+  background-color: #f4eaea;
+  transition: background-color 0.3s ease;
+}
+
+.social-media a:hover {
+  background-color: #ae0d0d;
+}
+
+.fab {
+  font-size: 16px;
+}
+
+.review-list {
+  list-style: none;
+  padding: 0;
+}
+
+
+.review-name {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+
+.review-comment {
+  margin-bottom: 5px;
+}
+
+#review-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+#review-form label {
+  margin-bottom: 5px;
+}
+
+#review-form input, #review-form select, #review-form textarea {
+  margin-bottom: 10px;
+  padding: 5px;
+  border-radius: 5px;
+  border: 2px solid #bd0a0a;
+}
+
+#review-form textarea {
+  resize: none;
+  height: 100px;
+}
+
+#review-form button {
+  background-color: #03f628;
+  color: rgb(246, 240, 240);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#review-form button:hover {
+  background-color: #006B9F;
+}
+
+.reviews {
+  text-align: center;
+  padding: 20px;
+  text-shadow: 0 0 10px #a39a9a, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #0ff, 0 0 70px #0ff, 0 0 80px #0ff, 0 0 100px #0ff, 0 0 150px #0ff;
+}
+
+.review {
+  margin-bottom: 20px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #0ff, 0 0 70px #0ff, 0 0 80px #0ff, 0 0 100px #0ff, 0 0 150px #0ff;
+}
+
+.review-rating {
+  color: #FFD700;
+  margin-bottom: 5px;
+  text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px rgb(6, 241, 241), 0 0 70px #0ff, 0 0 80px #0ff, 0 0 100px #0ff, 0 0 150px #0ff;
+}
+
+
+h1 {
+  font-size: 3em;
+  text-align: center;
+  margin-top: 50px;
+}
+
+#animated-text {
+  display: inline-block;
+  position: relative;
+}
+
+#animated-text:before, #animated-text:after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+#animated-text:before {
+  color: #FFD700;
+  z-index: 1;
+  text-shadow: 0 0 10px #FFD700, 0 0 20px #FFD700, 0 0 30px #FFD700, 0 0 40px #FFD700;
+}
+
+#animated-text:after {
+  color: #fff;
+  z-index: 2;
+  text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #fff;
+}
+
+#animated-text:hover:before, #animated-text:hover:after {
+  opacity: 1;
+}
+f
+
+.wrapper{
+  display: inline-flex;
+}
+.wrapper .icon{
+  margin: 0 20px;
+  text-align: center;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  position: relative;
+  z-index: 2;
+  transition: 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+.wrapper .icon span{
+  display: block;
+  height: 60px;
+  width: 60px;
+  background: #fff;
+  border-radius: 50%;
+  position: relative;
+  z-index: 2;
+  box-shadow: 0px 10px 10px rgba(0,0,0,0.1);
+  transition: 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+.wrapper .icon span i{
+  line-height: 60px;
+  font-size: 25px;
+}
+.wrapper .icon .tooltip{
+  position: absolute;
+  top: 0;
+  z-index: 1;
+  background: #fff;
+  color: #fff;
+  padding: 10px 18px;
+  font-size: 20px;
+  font-weight: 500;
+  border-radius: 15px;
+  opacity: 0;
+  pointer-events: none;
+  box-shadow: 0px 10px 10px rgba(0,0,0,0.1);
+  transition: 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+.wrapper .icon:hover .tooltip{
+  top: -70px;
+  opacity: 1;
+  pointer-events: auto;
+}
+.icon .tooltip:before{
+  position: absolute;
+  content: "";
+  height: 15px;
+  width: 15px;
+  background: #fff;
+  left: 50%;
+  bottom: -6px;
+  transform: translateX(-50%) rotate(45deg);
+  transition: 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+.wrapper .icon:hover span{
+  color: #fff;
+}
+.wrapper .icon:hover span,
+.wrapper .icon:hover .tooltip{
+  text-shadow: 0px -1px 0px rgba(0,0,0,0.4);
+}
+.wrapper .facebook:hover span,
+.wrapper .facebook:hover .tooltip,
+.wrapper .facebook:hover .tooltip:before{
+  background: #3B5999;
+}
+.wrapper .twitter:hover span,
+.wrapper .twitter:hover .tooltip,
+.wrapper .twitter:hover .tooltip:before{
+  background: #46C1F6;
+}
+.wrapper .instagram:hover span,
+.wrapper .instagram:hover .tooltip,
+.wrapper .instagram:hover .tooltip:before{
+  background: #e1306c;
+}
+.wrapper .github:hover span,
+.wrapper .github:hover .tooltip,
+.wrapper .github:hover .tooltip:before{
+  background: #333;
+}
+.wrapper .youtube:hover span,
+.wrapper .youtube:hover .tooltip,
+.wrapper .youtube:hover .tooltip:before{
+  background: #DE463B;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  position: fixed;
+  background-color: #f605b9;
+  color: white;
+  font-size: 1rem;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: 6px;
+}
+
+.logo {
+  color: #fff;
+  font-weight: bold;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+.nav-links {
+  display: flex;
+  justify-content: space-between;
+  width: 50%;
+}
+
+.nav-links li {
+  list-style: none;
+}
+
+.nav-links a {
+  color: #fff;
+  text-decoration: none;
+  text-transform: uppercase;
+  padding: 0 10px;
+  letter-spacing: 1px;
+}
+
+.burger {
+  display: none;
+}
+
+.burger div {
+  width: 25px;
+  height: 3px;
+  background-color: #fff;
+  margin: 5px;
+  transition: all 0.3s ease;
+}
+
+@media screen and (max-width: 768px) {
+  .nav-links {
+    position: fixed;
+    right: 0;
+    height: 100vh;
+    top: 80px;
+    background-color: #222;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 50%;
+    transform: translateX(100%);
+    transition: transform 0.5s ease-in;
+  }
+
+  .nav-links li {
+    opacity: 0;
+  }
+
+  .burger {
+    display: block;
+    cursor: pointer;
+  }
+}
+
+.nav-active {
+  transform: translateX(0%);
+}
+
+.burger.open div:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 6px);
+}
+
+.burger.open div:nth-child(2) {
+  opacity: 0;
+}
+
+.burger.open div:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -6px);
+}
+
+.neon {
+  color: #fff;
+  font-family: 'Roboto Condensed', sans-serif;
+  font-size: 3rem;
+  text-shadow: 0 0 10px #fff,
+               0 0 20px #fff,
+               0 0 30px #fff,
+               0 0 40px #ff00de,
+               0 0 70px #ff00de,
+               0 0 80px #ff00de,
+               0 0 100px #ff00de,
+               0 0 150px #ff00de;
+}
+
+.neon:hover {
+  animation: flicker 1.5s linear infinite;
+}
+
+.social-links{
+    text-align: center;
+    
+}
+
+.social-links .fa{
+    height: 40px;
+    width: 40px;
+    font-size: 30px;
+    line-height: 40px;
+    border: 1px solid #009688;
+    margin: 30px 4px 0;
+    color: #009688;
+    cursor: pointer;
+    margin-top: 12px;
+    border-radius: 20px;
+}
+
+.social-links .fa:hover{
+    background: #f44336;
+    color: #fff;
+    transform: translateY(-7px);
+}
+
+.social-links p{
+    font-size: 12px;
+    margin-top: 20px;
+    
+}
+
+  </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="#" class="logo">:></a>
+        <ul class="nav-links">
+         <li></li>
+          
+          
+          <li><a href="index.html"><<<<<<</a></li>
+        </ul>
+        </nav><br><br>
+    <footer>
+        <div class="footer-container">
+          <div class="footer-content">
+            <h2>About Us</h2>
+            <p>Image processing is the manipulation and analysis of digital images, often with the goal of improving their visual appearance or extracting useful information from them. It involves applying various mathematical algorithms and techniques to perform operations such as image enhancement, restoration, filtering, segmentation, feature extraction, and pattern recognition</p>
+          </div>
+          <div class="footer-content">
+            <h2>Contact Us</h2>
+            <p>ABDUL TAQUI<br> 1NH20CS004<br> Email: abdultaqui158@gmail.com<br> Phone: (+91) 6362648894</p>
+          </div>
+          <div class="footer-content">
+            <h2>Follow Us</h2>
+            <div class="wrapper">
+              <div class="social-links">
+                <ul><a href="https://www.facebook.com/"><i class="fa fa-facebook"></i></a></ul>
+                <ul><a href="https://www.instagram.com/"><i class="fa fa-instagram"></i></a></ul>
+                  <ul><a href="https://www.twitter.com/"><i class="fa fa-twitter"></i></a></ul>
+                    <ul><a href="https://www.youtube.com/"><i class="fa fa-youtube-play"></i></a></ul>
+                    <p><center>Avoid Copyrights</center></p>
+                
+                </div>
+          </div>
+        </div>
+      </footer>
+      <div class="reviews">
+        <h1>REVIEW<span id="animated-text"></span></h1>
+      
+        <ul class="review-list"></ul>
+        <form id="review-form">
+          <label for="review-name">Name:</label>
+          <input type="text" id="review-name" required>
+          <label for="review-rating">Rating:</label>
+          <select id="review-rating" required>
+            <option value="">Select a rating</option>
+            <option value="5">5 stars</option>
+            <option value="4">4 stars</option>
+            <option value="3">3 stars</option>
+            <option value="2">2 stars</option>
+            <option value="1">1 star</option>
+          </select>
+          <label for="review-comment">Comment:</label>
+          <textarea id="review-comment" required></textarea>
+          <button type="submit">Submit Review</button>
+        </form>
+      </div>
+
+     
+      <script src="script4.js"></script>
+</body>
+</html>
